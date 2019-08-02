@@ -50,7 +50,7 @@ if(process.env.NODE_ENV !== 'production') {
 authRef.onAuthStateChanged(user => {
   store.dispatch(startCheckAuth());
   if(user) {
-    store.dispatch(setApiToken(user.ra)); store.dispatch(closeUserFormLogin()); store.dispatch(auth(user));
+    store.dispatch(setApiToken(user)); store.dispatch(closeUserFormLogin()); store.dispatch(auth(user));
   } else {
     store.dispatch(not_auth()); store.dispatch(notAuth());
   }

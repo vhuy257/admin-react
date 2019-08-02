@@ -11,11 +11,13 @@ import {
 } from '../actions/userActions';
 
 const initialState = {
+    displayName: '',
+    photoUrl: '',
     email: '',
     password: '',
+    apiToken: '',
     showFormLogin: false,
     showFormCreateAccount: false,
-    apiToken: '',
 }
 
 export default function userReducer (
@@ -35,7 +37,9 @@ export default function userReducer (
     case SET_USER_TOKEN:
       return {
         ...state,
-        apiToken: action.payload.token,
+        apiToken: action.payload.token.ra,
+        displayName: action.payload.token.displayName || '',
+        email: action.payload.token.email
       };
     case SHOW_FORM_LOGIN:
       return {
