@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
-import { Card, CardBody, Col, Row, Table } from 'reactstrap';
+import { Card, CardBody, Col, Row, Table, Button, Modal, ModalBody, ModalFooter, ModalHeader, CardHeader} from 'reactstrap';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import ROUTES from '../../constants/routes';
 import {
-    getData
+    getData,
+    deleteData
 } from '../../redux/actions/apiActions';
 import {
-    getListTopicSuccess
+    getListTopicSuccess,
+    removeTopic 
 } from '../../redux/actions/topicActions';
 
 const apiURLGetList = `${ROUTES.API_BASE_URL}api/topics/listopic/20`;
 
 class ListPosts extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            danger: false,
+            itemSelect: {}
+        }
+        this.toggleDanger = this.toggleDanger.bind(this);
+        this.removePost = this.removePost.bind(this);
+    }
+
     componentDidMount() {
         this.props.dispatch(getData(apiURLGetList, getListTopicSuccess))
+    }
+
+    toggleDanger(item) {
+        this.setState({
+          danger: !this.state.danger,
+          itemSelect: item
+        });
+    }
+
+    removePost() {
+        const apiURL = `${ROUTES.API_BASE_URL}api/topics/remove/${this.state.itemSelect._id}`;
+        this.props.dispatch(deleteData(apiURL, removeTopic(this.state.itemSelect)));
+        this.setState({
+            danger: !this.state.danger,
+        });
     }
 
     render() {
@@ -23,8 +50,10 @@ class ListPosts extends Component {
             <Row>
             <Col lg={12}>
                 <Card>
+                    <CardHeader>
+                        <strong>List posts</strong>
+                    </CardHeader>
                 <CardBody>
-                <h2>Posts</h2>
                 {this.props.loading && 
                     <div className="text-center"><h5>Loading data...</h5></div>
                 }
@@ -47,12 +76,15 @@ class ListPosts extends Component {
                             {   
                                 this.props.topic && this.props.topic.listTopic.map((item, key) => (
                                     <tr key={key}>
-                                        <th scope="row">{item._id}</th>
+                                        <td scope="row">{item._id}</td>
                                         <td>{item.title}</td>
                                         <td>{item.user}</td>
                                         <td>{item.createdAt}</td>
                                         <td>{item.updatedAt}</td>
-                                        <td><button className="btn btn-light btn-block">Edit</button> <button className="btn btn-ghost-danger btn-block">Remove</button></td>
+                                        <td>
+                                            <button className="btn btn-light btn-block">Edit</button> 
+                                            <button className="btn btn-ghost-danger btn-block" onClick={() => this.toggleDanger(item)}>Remove</button>
+                                        </td>
                                     </tr>
                                 ))
                             } 
@@ -74,6 +106,17 @@ class ListPosts extends Component {
                 </Card>
             </Col>
             </Row>
+            <Modal isOpen={this.state.danger} toggle={this.toggleDanger}
+                       className={'modal-danger ' + this.props.className}>
+                  <ModalHeader toggle={this.toggleDanger}>Remove post</ModalHeader>
+                  <ModalBody>
+                    Are you sure you want to remove this?
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" onClick={this.removePost}>Yes</Button>{' '}
+                    <Button color="secondary" onClick={this.toggleDanger}>Cancel</Button>
+                  </ModalFooter>
+            </Modal>
         </div>
         )
     }

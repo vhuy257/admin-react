@@ -24,6 +24,11 @@ export default {
       icon: 'icon-layers',
     },
     {
+      name: 'Create posts',
+      url: '/post/create',
+      icon: 'icon-pencil',
+    },
+    {
       title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object

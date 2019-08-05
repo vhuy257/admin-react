@@ -13,3 +13,28 @@
 .pagination {
     margin-top: 20px;
 }
+
+.form-actions button {
+    margin-right: 15px;
+}
+
+.rdw-editor-main {
+    border: 1px solid #F1F1F1;
+    padding: 10px;
+    border-radius: 2px;
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.create--post form {
+    display: block;
+    width: 100%;
+}
+
+.image-topic--wrapper {
+    margin-top: 20px;
+    .remove-image {
+        margin-right: 10px;
+    }
+}
