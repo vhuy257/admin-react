@@ -5,41 +5,49 @@ import EditorTpl from './editor';
 import ImageTopic from './imageUpload';
 import ROUTES from '../../constants/routes';
 import WithLoading from '../../hoc/loading';
+import draftToHtml from 'draftjs-to-html';
+import { convertToRaw } from 'draft-js';
 
 import {
     changeField,
-    insertTopicSuccess
+    fetchTopicSuccess,
+    fetchTagsCurrent,
 } from '../../redux/actions/topicActions';
 import {
-    addData
+    getData,
+    updateData,
 } from '../../redux/actions/apiActions';
 
 const ImageWithLoading = WithLoading(ImageTopic);
-const apiUrl = `${ROUTES.API_BASE_URL}api/post/add`;
+const apiUpdate = `${ROUTES.API_BASE_URL}api/post/update`;
 
-class CreatePost extends Component {
+class EditPost extends Component {
     constructor(props) {
         super(props);
-        this.createPost = this.createPost.bind(this);
-        this.changeField         = this.changeField.bind(this);
+        this.changeField = this.changeField.bind(this);
+        this.updatePost  = this.updatePost.bind(this);
+    }
+
+    componentDidMount() {
+        const apiURL = `${ROUTES.API_BASE_URL}api/post/id/${this.props.router.match.params.id}`;
+        this.props.dispatch(getData(apiURL, fetchTopicSuccess, fetchTagsCurrent));
     }
 
     changeField(e) {
         this.props.dispatch(changeField({[e.target.name] : e.target.value}))
     }
 
-    createPost(e) {
+    updatePost(e) {
         e.preventDefault();
         var post = {
-            user: this.props.api.userCreateTopic || 'Anonymous',
-            category: this.props.topic.category,
-            title: this.props.topic.titleTopic,
-            excerpt: this.props.topic.excerptTopic,
-            content: this.props.topic.contentTopic,
+            _id: this.props.topic._id,
+            user: this.props.auth.userName || undefined,
+            titleTopic: this.props.topic.titleTopic,
             imageUrl: this.props.topic.topicImage,
-        }
-        console.log(post);
-        this.props.dispatch(addData(apiUrl, post, insertTopicSuccess));
+            excerptTopic: this.props.topic.excerptTopic,
+            contentTopic: draftToHtml(convertToRaw(this.props.topic.contentTopic.getCurrentContent())),
+        };
+        this.props.dispatch(updateData(apiUpdate, post));
     }
 
     render() {
@@ -49,11 +57,11 @@ class CreatePost extends Component {
                     <Col lg={12}>
                         <Card>
                         <CardHeader>
-                            <strong>Create post</strong>
+                            <strong>Edit post</strong>
                         </CardHeader>
                         <CardBody>
                             <Row>
-                                <Form onSubmit={this.createPost}>
+                                <Form onSubmit={this.updatePost}>
                                     <Col>
                                         <FormGroup>
                                             <Label htmlFor="name">Title</Label>
@@ -100,7 +108,7 @@ class CreatePost extends Component {
                                     <Col>
                                         <FormGroup>
                                             <Label htmlFor="Description">Description</Label>
-                                            <EditorTpl onEditorStateChange={this.onEditorStateChange}/>
+                                            <EditorTpl updateTopic={true}/>
                                         </FormGroup>
                                     </Col>
                                     <Col>
@@ -122,8 +130,8 @@ class CreatePost extends Component {
 
 const mapStateToProps = state => ({
     topic: state.topic,
-    api: state.api,
+    auth: state.auth,
     loading: state.api.isLoading,
 });
 
-export default connect(mapStateToProps)(CreatePost);
+export default connect(mapStateToProps)(EditPost);

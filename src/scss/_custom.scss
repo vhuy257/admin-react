@@ -10,6 +10,24 @@
     }
 }
 
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list--post-header {
+    button {
+        width: 200px;
+    }
+    a:hover {
+        color: #fff;
+    }
+}
+
+table td {
+    text-align: center;
+}
+
 .pagination {
     margin-top: 20px;
 }

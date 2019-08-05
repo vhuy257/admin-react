@@ -22,6 +22,7 @@ const initialState = {
   titleTopic: '',
   contentTopic: EditorState.createEmpty(),
   excerptTopic: '',
+  category: '',
   userCreateTopic: null,
   topicImage: '',
   createdAt: '',

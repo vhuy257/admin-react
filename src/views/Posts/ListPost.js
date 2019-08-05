@@ -12,7 +12,7 @@ import {
     removeTopic 
 } from '../../redux/actions/topicActions';
 
-const apiURLGetList = `${ROUTES.API_BASE_URL}api/topics/listopic/20`;
+const apiURLGetList = `${ROUTES.API_BASE_URL}api/post/listposts/20`;
 
 class ListPosts extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class ListPosts extends Component {
     }
 
     removePost() {
-        const apiURL = `${ROUTES.API_BASE_URL}api/topics/remove/${this.state.itemSelect._id}`;
+        const apiURL = `${ROUTES.API_BASE_URL}api/post/remove/${this.state.itemSelect._id}`;
         this.props.dispatch(deleteData(apiURL, removeTopic(this.state.itemSelect)));
         this.setState({
             danger: !this.state.danger,
@@ -50,8 +50,11 @@ class ListPosts extends Component {
             <Row>
             <Col lg={12}>
                 <Card>
-                    <CardHeader>
-                        <strong>List posts</strong>
+                    <CardHeader className="list--post-header">
+                        <div className="d-flex">
+                            <strong>List posts</strong>
+                            <button className="btn btn-outline-primary btn-block"><Link to="/post/create">Create</Link></button>
+                        </div>
                     </CardHeader>
                 <CardBody>
                 {this.props.loading && 
@@ -65,6 +68,8 @@ class ListPosts extends Component {
                             <thead className="thead-light">
                             <tr>
                                 <th>#Id</th>
+                                <th>Category</th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Create by</th>
                                 <th>Created At</th>
@@ -76,13 +81,25 @@ class ListPosts extends Component {
                             {   
                                 this.props.topic && this.props.topic.listTopic.map((item, key) => (
                                     <tr key={key}>
-                                        <td scope="row">{item._id}</td>
+                                        <td>{item._id}</td>
+                                        <td>{item.category}</td>
+                                        <td>
+                                            {
+                                                item.image && <img src={item.image} alt={item.title} width="200"/>
+                                            }
+                                            {
+                                                !item.image && <span>No Image</span>
+                                            }
+                                        </td>
                                         <td>{item.title}</td>
                                         <td>{item.user}</td>
                                         <td>{item.createdAt}</td>
                                         <td>{item.updatedAt}</td>
                                         <td>
-                                            <button className="btn btn-light btn-block">Edit</button> 
+                                            <button className="btn btn-light btn-block">
+                                                <Link to={`/post/edit/${item._id}`}>
+                                                Edit</Link>
+                                            </button> 
                                             <button className="btn btn-ghost-danger btn-block" onClick={() => this.toggleDanger(item)}>Remove</button>
                                         </td>
                                     </tr>
