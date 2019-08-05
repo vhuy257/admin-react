@@ -9,7 +9,7 @@ import {
 } from '../actions/apiActions';
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   errorData: null,
   dataFetch: null,
 }

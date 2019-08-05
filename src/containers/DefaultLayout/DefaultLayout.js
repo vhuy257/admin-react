@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import Modal from '../../hoc/modal';
 
 import {
   AppAside,
@@ -79,6 +80,7 @@ class DefaultLayout extends Component {
             <DefaultFooter />
           </Suspense>
         </AppFooter>
+        <Modal/>
       </div>
     );
   }

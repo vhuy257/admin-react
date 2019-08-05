@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 function WithLoading(WrappedComponent) {
   return class extends Component {
     render() {
+      console.log('loading', this.props.isLoading);
       if(this.props.isLoading) {
         return (
           <>

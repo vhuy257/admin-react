@@ -10,6 +10,15 @@
     }
 }
 
+button {
+    border: none;
+    background: #20a8d8;
+    border-radius: 2px;
+    color: #fff;
+    box-shadow: none;
+    outline: 0;
+}
+
 .d-flex {
     display: flex;
     justify-content: space-between;

@@ -38,7 +38,6 @@ class CreatePost extends Component {
             content: this.props.topic.contentTopic,
             imageUrl: this.props.topic.topicImage,
         }
-        console.log(post);
         this.props.dispatch(addData(apiUrl, post, insertTopicSuccess));
     }
 
