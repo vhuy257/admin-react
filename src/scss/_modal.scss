@@ -1,7 +1,7 @@
 .md-modal {
     position: fixed;
-    bottom: 70px;
-    right: 30px;
+    bottom: 0;
+    right: -170px;
     width: 50%;
     max-width: 400px;
     min-width: 200px;
@@ -11,6 +11,10 @@
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
     &.success {
       .md-content {
         background: #00d1b2;
@@ -43,14 +47,14 @@
       position: relative;
       border-radius: 3px;
       margin: 0 auto;
-      webkit-transform: scale(0.7);
-      -moz-transform: scale(0.7);
-      -ms-transform: scale(0.7);
-      transform: scale(0.7);
+      -webkit-transform: translateX(20%);
+      -moz-transform: translateX(20%);
+      -ms-transform: translateX(20%);
+      transform: translateX(20%);
       opacity: 0;
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-      transition: all 0.3s;
+      -webkit-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+      -moz-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+      transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
       h3 {
         margin: 0;
         padding: 0.4em;
@@ -83,10 +87,10 @@
     &.md-show {
       visibility: visible;
       .md-content {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
         opacity: 1;
       }
     }

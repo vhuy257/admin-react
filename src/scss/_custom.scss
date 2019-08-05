@@ -24,9 +24,27 @@ button {
     justify-content: space-between;
 }
 
+button a {
+    display: block;
+}
+
+.btn-light {
+    a,
+    a:hover {
+        color: #333;
+        text-decoration: none;
+    }
+}
+
 .list--post-header {
     button {
         width: 200px;
+        padding: 0;
+    }
+    a {
+        display: block;
+        padding: 0.375rem 0.75rem;
+        text-decoration: none;
     }
     a:hover {
         color: #fff;
