@@ -42,6 +42,7 @@ class EditPost extends Component {
         var post = {
             _id: this.props.topic._id,
             user: this.props.auth.userName || undefined,
+            category: this.props.topic.category,
             titleTopic: this.props.topic.titleTopic,
             imageUrl: this.props.topic.topicImage,
             excerptTopic: this.props.topic.excerptTopic,
@@ -79,9 +80,9 @@ class EditPost extends Component {
                                     <FormGroup>
                                         <Label htmlFor="category">Category</Label>
                                         <Input type="select" name="category" vale={this.props.topic.category} id="category" onChange={this.changeField}>
-                                            <option value="Miền Bắc">Miền Bắc</option>
-                                            <option value="Miền Nam">Miền Nam</option>
-                                            <option value="Miền Trung">Miền Trung</option>
+                                            <option  value="Miền Bắc">Miền Bắc</option>
+                                            <option  value="Miền Nam">Miền Nam</option>
+                                            <option  value="Miền Trung">Miền Trung</option>
                                         </Input>
                                     </FormGroup>
                                     </Col>
