@@ -3,6 +3,9 @@ import { Card, CardBody, Col, Row, Table, Button, Modal, ModalBody, ModalFooter,
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import ROUTES from '../../constants/routes';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import {
     getData,
     deleteData
@@ -67,7 +70,7 @@ class ListPosts extends Component {
                         <Table hover responsive bordered className="table-outline mb-0 d-none d-sm-table">
                             <thead className="thead-light">
                             <tr>
-                                <th>#Id</th>
+                                <th>Id</th>
                                 <th>Category</th>
                                 <th>Image</th>
                                 <th>Title</th>
@@ -81,11 +84,16 @@ class ListPosts extends Component {
                             {   
                                 this.props.topic && this.props.topic.listTopic.map((item, key) => (
                                     <tr key={key}>
-                                        <td>{item._id}</td>
+                                        <td>{key + 1}</td>
                                         <td>{item.category}</td>
                                         <td>
                                             {
-                                                item.image && <img src={item.image} alt={item.title} width="200"/>
+                                                item.image && 
+                                                <LazyLoadImage 
+                                                src={item.image} 
+                                                effect="blur"
+                                                width="200"
+                                                alt={item.title}/>
                                             }
                                             {
                                                 !item.image && <span>No Image</span>
