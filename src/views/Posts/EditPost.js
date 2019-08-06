@@ -7,7 +7,7 @@ import ROUTES from '../../constants/routes';
 import WithLoading from '../../hoc/loading';
 import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
-
+import Category from './category';
 import {
     changeField,
     fetchTopicSuccess,
@@ -20,6 +20,7 @@ import {
 
 const ImageWithLoading = WithLoading(ImageTopic);
 const apiUpdate = `${ROUTES.API_BASE_URL}api/post/update`;
+
 
 class EditPost extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class EditPost extends Component {
         var post = {
             _id: this.props.topic._id,
             user: this.props.auth.userName || undefined,
-            category: this.props.topic.category,
+            categoryTopic: this.props.topic.category,
             titleTopic: this.props.topic.titleTopic,
             imageUrl: this.props.topic.topicImage,
             excerptTopic: this.props.topic.excerptTopic,
@@ -78,12 +79,7 @@ class EditPost extends Component {
                                     </Col>
                                     <Col>
                                     <FormGroup>
-                                        <Label htmlFor="category">Category</Label>
-                                        <Input type="select" name="category" vale={this.props.topic.category} id="category" onChange={this.changeField}>
-                                            <option  value="Miền Bắc">Miền Bắc</option>
-                                            <option  value="Miền Nam">Miền Nam</option>
-                                            <option  value="Miền Trung">Miền Trung</option>
-                                        </Input>
+                                        <Category/>
                                     </FormGroup>
                                     </Col>
                                     <Col>

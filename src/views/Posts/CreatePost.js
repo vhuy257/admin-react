@@ -5,9 +5,10 @@ import EditorTpl from './editor';
 import ImageTopic from './imageUpload';
 import ROUTES from '../../constants/routes';
 import WithLoading from '../../hoc/loading';
-
+import Category from './category';
 import {
     changeField,
+    resetTopic,
     insertTopicSuccess
 } from '../../redux/actions/topicActions';
 import {
@@ -23,6 +24,10 @@ class CreatePost extends Component {
         this.createPost = this.createPost.bind(this);
         this.changeField         = this.changeField.bind(this);
     }
+    
+    componentDidMount() {
+        this.props.dispatch(resetTopic());
+    }
 
     changeField(e) {
         this.props.dispatch(changeField({[e.target.name] : e.target.value}))
@@ -37,7 +42,7 @@ class CreatePost extends Component {
             excerpt: this.props.topic.excerptTopic,
             content: this.props.topic.contentTopic,
             imageUrl: this.props.topic.topicImage,
-        }
+        };
         this.props.dispatch(addData(apiUrl, post, insertTopicSuccess));
     }
 
@@ -68,12 +73,7 @@ class CreatePost extends Component {
                                     </Col>
                                     <Col>
                                     <FormGroup>
-                                        <Label htmlFor="category">Category</Label>
-                                        <Input type="select" name="category" vale={this.props.topic.category} id="category" onChange={this.changeField}>
-                                            <option value="Miền Bắc">Miền Bắc</option>
-                                            <option value="Miền Nam">Miền Nam</option>
-                                            <option value="Miền Trung">Miền Trung</option>
-                                        </Input>
+                                        <Category/>
                                     </FormGroup>
                                     </Col>
                                     <Col>

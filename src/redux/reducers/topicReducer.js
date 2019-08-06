@@ -15,14 +15,15 @@ import {
   FETCH_TAG_CURRENT,
   FILTER_TOPIC_BY_TAGS,
   SET_IMAGE_TOPIC,
-  TOGGLE_LIST
+  TOGGLE_LIST,
+  RESET_TOPIC
 } from '../actions/topicActions';
 
 const initialState = {
   titleTopic: '',
   contentTopic: EditorState.createEmpty(),
   excerptTopic: '',
-  category: '',
+  category: 'Miền Nam',
   userCreateTopic: null,
   topicImage: '',
   createdAt: '',
@@ -51,6 +52,12 @@ export default function TopicReducer (
   action
 ) {
   switch (action.type) {
+    case RESET_TOPIC:
+      return {
+        ...state,
+        category: 'Miền Nam',
+        topicImage: '',
+      };
     case GET_LIST_TOPIC_SUCCESS:
       return {
         ...state,
@@ -61,6 +68,7 @@ export default function TopicReducer (
       return {
         ...state,
         createdAt: action.payload.topic.data[0].createdAt,
+        category: action.payload.topic.data[0].category,
         userCreateTopic: action.payload.topic.data[0].user,
         _id: action.payload.topic.data[0]._id,
         titleTopic: action.payload.topic.data[0].title,

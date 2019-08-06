@@ -28,6 +28,11 @@ export const FETCH_TAG_CURRENT           = "FETCH_TAG_CURRENT";
 export const FILTER_TOPIC_BY_TAGS        = "FILTER_TOPIC_BY_TAGS";
 export const SET_IMAGE_TOPIC             = "SET_IMAGE_TOPIC";
 export const TOGGLE_LIST                 = "TOGGLE_LIST";
+export const RESET_TOPIC                 = "RESET_TOPIC";
+
+export const resetTopic = data =>({
+  type: RESET_TOPIC
+});
 
 export const getListTopicSuccess = data => ({
   type: GET_LIST_TOPIC_SUCCESS,
