@@ -17,6 +17,7 @@ import {
     getData,
     updateData,
 } from '../../redux/actions/apiActions';
+import Tag from './tags';
 
 const ImageWithLoading = WithLoading(ImageTopic);
 const apiUpdate = `${ROUTES.API_BASE_URL}api/post/update`;
@@ -48,6 +49,7 @@ class EditPost extends Component {
             imageUrl: this.props.topic.topicImage,
             excerptTopic: this.props.topic.excerptTopic,
             contentTopic: draftToHtml(convertToRaw(this.props.topic.contentTopic.getCurrentContent())),
+            tags: this.props.topic.tags.current
         };
         this.props.dispatch(updateData(apiUpdate, post));
     }
@@ -78,9 +80,10 @@ class EditPost extends Component {
                                         </FormGroup>
                                     </Col>
                                     <Col>
-                                    <FormGroup>
-                                        <Category/>
-                                    </FormGroup>
+                                        <FormGroup>
+                                            <Label htmlFor="tag">Tag</Label>
+                                            <Tag/>
+                                        </FormGroup>
                                     </Col>
                                     <Col>
                                         <FormGroup>

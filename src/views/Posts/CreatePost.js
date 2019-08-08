@@ -14,6 +14,7 @@ import {
 import {
     addData
 } from '../../redux/actions/apiActions';
+import Tag from './tags';
 
 const ImageWithLoading = WithLoading(ImageTopic);
 const apiUrl = `${ROUTES.API_BASE_URL}api/post/add`;
@@ -42,6 +43,7 @@ class CreatePost extends Component {
             excerpt: this.props.topic.excerptTopic,
             content: this.props.topic.contentTopic,
             imageUrl: this.props.topic.topicImage,
+            tags: this.props.topic.tags.current
         };
         this.props.dispatch(addData(apiUrl, post, insertTopicSuccess));
     }
@@ -72,9 +74,10 @@ class CreatePost extends Component {
                                         </FormGroup>
                                     </Col>
                                     <Col>
-                                    <FormGroup>
-                                        <Category/>
-                                    </FormGroup>
+                                        <FormGroup>
+                                            <Label htmlFor="tag">Tag</Label>
+                                            <Tag/>
+                                        </FormGroup>
                                     </Col>
                                     <Col>
                                         <FormGroup>

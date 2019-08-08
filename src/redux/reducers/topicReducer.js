@@ -141,7 +141,7 @@ export default function TopicReducer (
       return {
         ...state,
         tags: {
-          current: action.payload.data.data[0].tags,
+          current: action.payload.data.data[0].tags || [],
           suggestions: state.tags.suggestions,
         }
       };

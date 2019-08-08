@@ -83,3 +83,64 @@ table td {
         margin-right: 10px;
     }
 }
+
+.react-tags__search-input {
+    border: 1px solid #ccc;
+    input {
+        width: 100%;
+        display: block;
+        padding: 10px 0;
+        border: none;
+        outline: 0;
+    }
+}
+
+.react-tags__search {
+    margin: 10px 0; 
+}
+
+.react-tags__selected-tag,
+.tag-item {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #ccc;
+    color: #333;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 5px 5px 0 0;
+}
+
+.react-tags__search-input {
+    position: relative;
+    div {
+        background: #fff;
+        padding: 10px;
+        border: 1px solid #ccc;
+        left: 0;
+        right: 0;
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+    }
+}
+
+.react-tags__suggestions {
+    ul {
+        padding: 10px 5px;
+        background: #fff;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+        list-style-type: none;
+        li {
+            cursor: pointer;
+        }
+    }
+}
+
+.tag-item {
+    background: #ccc;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 3px;
+}

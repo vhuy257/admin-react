@@ -71,7 +71,7 @@ class ListPosts extends Component {
                             <thead className="thead-light">
                             <tr>
                                 <th>Id</th>
-                                <th>Category</th>
+                                <th>Tags</th>
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Create by</th>
@@ -85,7 +85,11 @@ class ListPosts extends Component {
                                 this.props.topic && this.props.topic.listTopic.map((item, key) => (
                                     <tr key={key}>
                                         <td>{key + 1}</td>
-                                        <td>{item.category}</td>
+                                        <td>
+                                            {item.tags.map((item, key) => (
+                                                <span key={key} class="tag-item">{item.name}</span>
+                                            ))}
+                                        </td>
                                         <td>
                                             {
                                                 item.image && 
