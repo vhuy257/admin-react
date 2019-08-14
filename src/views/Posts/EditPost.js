@@ -7,7 +7,6 @@ import ROUTES from '../../constants/routes';
 import WithLoading from '../../hoc/loading';
 import draftToHtml from 'draftjs-to-html';
 import { convertToRaw } from 'draft-js';
-import Category from './category';
 import {
     changeField,
     fetchTopicSuccess,

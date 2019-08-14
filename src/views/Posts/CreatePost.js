@@ -5,7 +5,6 @@ import EditorTpl from './editor';
 import ImageTopic from './imageUpload';
 import ROUTES from '../../constants/routes';
 import WithLoading from '../../hoc/loading';
-import Category from './category';
 import {
     changeField,
     resetTopic,
