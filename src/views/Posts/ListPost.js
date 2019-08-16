@@ -87,7 +87,7 @@ class ListPosts extends Component {
                                         <td>{key + 1}</td>
                                         <td>
                                             {item.tags.map((item, key) => (
-                                                <span key={key} class="tag-item">{item.name}</span>
+                                                <span key={key} className="tag-item">{item.name}</span>
                                             ))}
                                         </td>
                                         <td>

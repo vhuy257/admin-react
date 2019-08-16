@@ -38,15 +38,6 @@ const initialState = {
   }
 }
 
-function convertContentListTopic(listTopic) {
-    let tempt = [];
-    listTopic.map((item) => {
-      item.content = convertFromHtmlToDraft(item.content);
-      return tempt.push(item);
-    });
-    return tempt;
-}
-
 export default function TopicReducer (
   state = initialState,
   action
@@ -61,7 +52,7 @@ export default function TopicReducer (
     case GET_LIST_TOPIC_SUCCESS:
       return {
         ...state,
-        listTopic: convertContentListTopic(action.payload.data.data.data),
+        listTopic: action.payload.data.data.data,
         pagesLength: action.payload.data.data.pages
       };
     case FETCH_TOPIC_CONTENT_SUCCESS:
